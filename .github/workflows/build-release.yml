@@ -4,7 +4,7 @@ on:
   push:
     tags:
       - "*"
- 
+
 jobs:
   build:
     name: ${{ matrix.arch }}-${{ matrix.branch }} build
@@ -54,10 +54,13 @@ jobs:
         with:
           name: ${{ matrix.arch }}-${{ matrix.branch }}-packages
           path: artifacts/*.ipk
-      
+
       - name: Release and Upload Assets
         uses: softprops/action-gh-release@v1
         with:
           files: "artifacts/*.ipk"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+permissions: 
+  contents: write
