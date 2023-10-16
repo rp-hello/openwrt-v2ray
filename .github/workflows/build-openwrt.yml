@@ -1,0 +1,54 @@
+name: OpenWrt Build
+
+on:
+  push:
+
+jobs:
+  build:
+    name: ${{ matrix.arch }}-${{ matrix.branch }} build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        branch:
+          - openwrt-21.02
+          - openwrt-22.03
+        arch:
+          - x86_64
+          - arm_cortex-a7
+          - arm_cortex-a9
+          - arm_cortex-a15_neon-vfpv4
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+
+      - name: mkdir artifacts
+        run: mkdir -p artifacts/v2ray-core artifacts/v2ray-geodata
+
+      - name: Build v2ray-core
+        uses: openwrt/gh-action-sdk@main
+        env:
+          ARCH: ${{ matrix.arch }}-${{ matrix.branch }}
+          FEED_DIR: ${{ github.workspace }}
+          PACKAGES: v2ray-core
+          ARTIFACTS_DIR: ${{ github.workspace }}/artifacts/v2ray-core
+
+      - name: Build v2ray-geodata
+        uses: openwrt/gh-action-sdk@main
+        env:
+          ARCH: ${{ matrix.arch }}-${{ matrix.branch }}
+          FEED_DIR: ${{ github.workspace }}
+          PACKAGES: v2ray-geodata
+          ARTIFACTS_DIR: ${{ github.workspace }}/artifacts/v2ray-geodata
+
+      - name: copy to artifacts
+        run: cp artifacts/*/bin/packages/${{ matrix.arch }}/action/*.ipk artifacts/
+
+      - name: Store packages
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.arch }}-${{ matrix.branch }}-packages
+          path: artifacts/*.ipk
