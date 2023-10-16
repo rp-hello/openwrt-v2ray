@@ -10,7 +10,7 @@ OpenWrt/LEDE 上可用的 V2Ray
 
 For luci-app-v2ray, please head to [luci-app-v2ray](https://github.com/rp-hello/luci-app-v2ray)
 
-We keep package naming, struct same with [OpenWrt Offcial](https://github.com/openwrt/packages/tree/openwrt-22.03/net/v2ray-core).
+We keep package naming, struct same with [OpenWrt Official](https://github.com/openwrt/packages/tree/openwrt-22.03/net/v2ray-core).
 
 ## Install via OPKG
 
