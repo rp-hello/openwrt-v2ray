@@ -3,6 +3,8 @@
 # Copyright (C) 2021 Xingwang Liao
 #
 
+set -x
+
 dir="$(cd "$(dirname "$0")" ; pwd)"
 
 package_name="v2ray-core"

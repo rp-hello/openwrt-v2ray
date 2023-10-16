@@ -1,0 +1,35 @@
+name: OpenWrt Build
+
+on:
+  push:
+
+jobs:
+  build:
+    name: ${{ matrix.arch }} build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch:
+          # - x86_64
+          - arm_cortex-a7
+          #- arm_cortex-a9
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Build
+        uses: openwrt/gh-action-sdk@main
+        env:
+          ARCH: mediatek-mt7629-21.02-SNAPSHOT
+          FEED_DIR: ${{ github.workspace }}
+          PACKAGES: v2ray-core
+          EXTRA_FEEDS: >-
+           src-git|upx|https://github.com/kuoruan/openwrt-upx;master
+
+      - name: Store packages
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.arch}}-packages
+          path: bin/packages/${{ matrix.arch }}/packages/*.ipk

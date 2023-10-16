@@ -13,6 +13,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - arch: arm_cortex-a7
+            sdk_url_path: https://downloads.openwrt.org/snapshots/targets/mediatek/mt7629
+            sdk_name: -sdk-mediatek-mt7629_
           - arch: aarch64_cortex-a53
             sdk_url_path: https://downloads.openwrt.org/snapshots/targets/bcm27xx/bcm2710
             sdk_name: -sdk-bcm27xx-bcm2710_
