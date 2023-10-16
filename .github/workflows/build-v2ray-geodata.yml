@@ -30,7 +30,7 @@ jobs:
         uses: openwrt/gh-action-sdk@main
         env:
           ARCH: ${{ matrix.arch }}-${{ matrix.branch }}
-          FEED_DIR: ${{ github.workspace }}/packages/net/
+          FEED_DIR: ${{ github.workspace }}
           PACKAGES: ${{ env.PACKAGE_NAME }}
 
       - run: "ls ."
