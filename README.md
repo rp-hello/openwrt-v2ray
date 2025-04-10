@@ -12,6 +12,10 @@ For luci-app-v2ray, please head to [luci-app-v2ray](https://github.com/rp-hello/
 
 We keep package naming, struct same with [OpenWrt Official](https://github.com/openwrt/packages/tree/openwrt-22.03/net/v2ray-core).
 
+## Archived
+
+Please use <https://openwrt.org/packages/pkgdata/xray-core>
+
 ## Install via OPKG
 
 1. Download ipk files from [Latest Release](https://github.com/rp-hello/openwrt-v2ray/releases/latest).
